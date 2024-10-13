@@ -95,3 +95,27 @@ def getChat(col):
         chat += com['name'] + " | " + com['comments']['comment'] + " | " + str(com['comments']['datetime']) + "\n"
 
     return chat
+
+#Part A
+def createDocument(col, id, text, title, date, category):
+    document = {
+        "text" : text, "title" : title, "date": date, "category" : category
+    }
+    col.insert_one(document)
+
+#Part B
+def updateDocument(col, id, text, title, date, category):
+    update_Document = {
+        "text" : text, "title" : title, "date" : date, "category" : category
+    }
+    col.update_one({"_id" : int(id)}, {"$set": update_Document})
+
+#Part C
+def deleteDocument(col, id):
+    col.delete_one({"_id": int(id)})
+
+#Part D
+def getIndex(col):
+    #Was not able to complete this part of the assignment
+    for doc in col.find():
+        title = doc["title"]
